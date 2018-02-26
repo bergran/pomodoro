@@ -8,6 +8,7 @@ import { IndexComponent } from './pages/index/index.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PomodoroComponent } from './container/pomodoro/pomodoro.component';
 import { CountdownComponent } from './component/countdown/countdown.component';
+import { FreetimeComponent } from './pages/freetime/freetime.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CountdownComponent } from './component/countdown/countdown.component';
     AppComponent,
     IndexComponent,
     PomodoroComponent,
-    CountdownComponent
+    CountdownComponent,
+    FreetimeComponent
   ],
   imports: [
     BrowserModule,

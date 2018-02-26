@@ -1,3 +1,7 @@
 <div class="index__container">
-  <app-pomodoro></app-pomodoro>
+  <app-pomodoro
+    [timeInMinutes]="25"
+    [startAutomatic]="true"
+    [onFinish]="handleFinish"
+  ></app-pomodoro>
 </div>

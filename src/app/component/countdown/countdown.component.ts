@@ -24,6 +24,7 @@ export class CountdownComponent implements OnInit {
 
   @Input () disabledButtons: string[];
   @Input () time: number;
+  @Input () startAutomatic = false;
   @Input () onStart = () => null;
   @Input () onStop = () => null;
   @Input () onReset = () => null;
@@ -43,7 +44,10 @@ export class CountdownComponent implements OnInit {
   ngOnInit() {
     this.checkValidate();
     this.setTime(this.time);
-    // this.getTime();
+
+    if (this.startAutomatic) {
+      this.startTime();
+    }
   }
 
   setTime(time: number) {
@@ -79,34 +83,36 @@ export class CountdownComponent implements OnInit {
   }
 
   manageTime (time: number) {
-    if (time < 1) {
-      this.onFinish();
+    if (time < 0) {
       this.setTime(this.time);
       this.subscription.unsubscribe();
       this.buttonStart = false;
       this.buttonReset = false;
       this.buttonStop = true;
+      this.onFinish();
     } else {
       this.getCurrentTime(time);
     }
   }
 
   startTime () {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
     this.subscription = this.countDownService.startTime()
       .subscribe(currentTime => this.manageTime(currentTime));
   }
 
   stopTime () {
-    this.onStop();
     this.countDownService.stopTime();
-    this.subscription.unsubscribe();
     this.buttonStart = false;
     this.buttonReset = false;
     this.buttonStop = true;
+    this.onStop();
   }
 
   resetTime () {
-    this.onReset();
     this.countDownService.resetTime(this.time);
+    this.onReset();
   }
 }

@@ -21,7 +21,7 @@ export class CountdownService {
 
   executeLoop = () => {
     this.currentTime = this.currentTime - 1;
-    if (this.currentTime < 1) {
+    if (this.currentTime < 0) {
       this.stopTime();
     }
     this.observable.next(this.currentTime);

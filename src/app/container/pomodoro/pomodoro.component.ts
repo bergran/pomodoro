@@ -9,15 +9,20 @@ export class PomodoroComponent implements OnInit {
   disableButtons: string[];
 
   @Input () timeInMinutes = 0;
-  @Input () working = false;
+  @Input () startAutomatic = true;
+  @Input () onFinish = () => null;
 
   constructor() { }
 
   ngOnInit() {
-    if (this.working) {
+    if (this.startAutomatic) {
       this.disableButtons = ['buttonStart', 'buttonReset'];
     } else {
       this.disableButtons = ['buttonStop'];
     }
+  }
+
+  handleFinish = () => {
+    this.onFinish();
   }
 }
