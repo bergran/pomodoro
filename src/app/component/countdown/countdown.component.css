@@ -1,0 +1,47 @@
+.countdown__wrapper{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 200px;
+}
+
+.countdown__title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.countdown__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.countdown__button {
+  height: 50px;
+  width: 150px;
+  border-radius: 2em;
+  color: #FFF;
+  cursor: pointer;
+}
+
+.countdown__button:hover {
+  background: #2690ff;
+}
+
+.countdown--start {
+  background: #35bc06;
+}
+
+.countdown--stop {
+  background: #ff0c13;
+}
+
+.countdown--reset {
+  background: #e3c100;
+}
+
+.countdown--disabled {
+  opacity: 0.2;
+}

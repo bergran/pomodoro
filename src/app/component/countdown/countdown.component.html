@@ -1,0 +1,29 @@
+<div class="countdown__wrapper">
+  <h1 class="countdown__title">00:00:00</h1>
+  <div class="countdown__buttons">
+    <button
+      class="countdown__button countdown--start {{buttonStart ? 'countdown--disabled' : ''}}"
+      id="countDownButtonStart"
+      [disabled]="buttonStart"
+      (click)="onClick('buttonStart')"
+    >
+      Start
+    </button>
+    <button
+      class="countdown__button countdown--stop {{buttonStop ? 'countdown--disabled' : ''}}"
+      id="countDownButtonStop"
+      [disabled]="buttonStop"
+      (click)="onClick('buttonStop')"
+    >
+      Stop
+    </button>
+    <button
+      class="countdown__button countdown--reset {{buttonReset ? 'countdown--disabled' : ''}}"
+      id="countDownButtonReset"
+      [disabled]="buttonReset"
+      (click)="onClick('buttonReset')"
+    >
+      Reset
+    </button>
+  </div>
+</div>

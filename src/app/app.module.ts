@@ -5,12 +5,16 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './pages/index/index.component';
 import { AppRoutingModule } from './app-routing.module';
+import { PomodoroComponent } from './container/pomodoro/pomodoro.component';
+import { CountdownComponent } from './component/countdown/countdown.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent
+    IndexComponent,
+    PomodoroComponent,
+    CountdownComponent
   ],
   imports: [
     BrowserModule,
