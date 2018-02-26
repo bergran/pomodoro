@@ -1,0 +1,13 @@
+.pomodoro__wrapper {
+  width: 500px;
+  height: 300px;
+  box-shadow: #ff9526 5px 5px 15px;
+  padding: 20px;
+}
+
+.pomodoro__title {
+  margin: 10px 0;
+  font-size: 25px;
+  font-weight: 500;
+}
+
