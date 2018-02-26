@@ -6,9 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./pomodoro.component.css']
 })
 export class PomodoroComponent implements OnInit {
-  @Input() working = false;
   disableButtons: string[];
-  timeInMinutes = 25
+
+  @Input () timeInMinutes = 0;
+  @Input () working = false;
 
   constructor() { }
 

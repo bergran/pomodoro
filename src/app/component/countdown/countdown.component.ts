@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CountdownService } from './countdown.service';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-countdown',
@@ -17,6 +19,8 @@ export class CountdownComponent implements OnInit {
   buttonStart: boolean;
   buttonStop: boolean;
   buttonReset: boolean;
+  currentTime: string;
+  private subscription: ISubscription;
 
   @Input () disabledButtons: string[];
   @Input () time: number;
@@ -34,10 +38,17 @@ export class CountdownComponent implements OnInit {
       value => value === 'buttonReset').length === 1;
   }
 
-  constructor() { }
+  constructor(private countDownService: CountdownService) { }
 
   ngOnInit() {
     this.checkValidate();
+    this.setTime(this.time);
+    // this.getTime();
+  }
+
+  setTime(time: number) {
+    this.countDownService.setTimeTo(time);
+    this.getCurrentTime(time * 60);
   }
 
   onClick(buttonName) {
@@ -45,14 +56,57 @@ export class CountdownComponent implements OnInit {
       this.buttonStart = true;
       this.buttonReset = true;
       this.buttonStop = false;
+
       // Start time
+      this.startTime();
     } else if (buttonName === 'buttonStop') {
       this.buttonStart = false;
       this.buttonReset = false;
       this.buttonStop = true;
+      this.stopTime();
       // Stop time
     } else if (buttonName === 'buttonReset') {
       // Reset time
+      this.resetTime();
     }
+  }
+
+  getCurrentTime (time: number) {
+    const hours = `${Math.floor(time / 3600)}`;
+    const minutes = `${Math.floor(time / 60)}`;
+    const seconds = `${Math.floor(time % 60)}`;
+    this.currentTime = `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+  }
+
+  manageTime (time: number) {
+    if (time < 1) {
+      this.onFinish();
+      this.setTime(this.time);
+      this.subscription.unsubscribe();
+      this.buttonStart = false;
+      this.buttonReset = false;
+      this.buttonStop = true;
+    } else {
+      this.getCurrentTime(time);
+    }
+  }
+
+  startTime () {
+    this.subscription = this.countDownService.startTime()
+      .subscribe(currentTime => this.manageTime(currentTime));
+  }
+
+  stopTime () {
+    this.onStop();
+    this.countDownService.stopTime();
+    this.subscription.unsubscribe();
+    this.buttonStart = false;
+    this.buttonReset = false;
+    this.buttonStop = true;
+  }
+
+  resetTime () {
+    this.onReset();
+    this.countDownService.resetTime(this.time);
   }
 }

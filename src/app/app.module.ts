@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { CountdownService } from './component/countdown/countdown.service'
 
 import { AppComponent } from './app.component';
 import { IndexComponent } from './pages/index/index.component';
@@ -20,7 +21,9 @@ import { CountdownComponent } from './component/countdown/countdown.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    CountdownService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
